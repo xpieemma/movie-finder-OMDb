@@ -83,7 +83,7 @@ movie-finder/
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are very welcome! Please feel free to submit a Pull Request.
 
 - **Student**
 - GitHub - [xpieemma](https://github.com/xpieemma)
