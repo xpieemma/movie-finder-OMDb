@@ -78,7 +78,7 @@ export interface FormattedMovieDetails extends FormattedMovie {
 }
 
 export interface SearchParams {
-  title: string;
+  title?: string;
   page?: number;
   type?: string;
   year?: string;

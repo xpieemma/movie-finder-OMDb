@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { HTTP_STATUS } from '../config/constants.ts';
+import { HTTP_STATUS } from '../config/constants.js';
 
 export const validateSearch = (req: Request, res: Response, next: NextFunction) => {
   const { title } = req.query;

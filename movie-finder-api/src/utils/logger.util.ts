@@ -1,4 +1,4 @@
-import Logger from '../config/logger';
+import Logger from '../config/logger.js';
 
 export const logRequest = (req: any, message: string, data?: any) => {
   Logger.info(message, {

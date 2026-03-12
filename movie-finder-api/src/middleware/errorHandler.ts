@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import Logger from '../config/logger.ts';
-import { HTTP_STATUS, ERROR_MESSAGES } from '../config/constants.ts';
-import { config } from '../config/env.ts';
+import Logger from '../config/logger.js';
+import { HTTP_STATUS, ERROR_MESSAGES } from '../config/constants.js';
+import { config } from '../config/env.js';
 
 interface ErrorWithStatus extends Error {
   statusCode?: number;

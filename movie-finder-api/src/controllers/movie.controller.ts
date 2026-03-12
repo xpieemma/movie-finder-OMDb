@@ -14,7 +14,13 @@ export const searchMovies = async (
 ) => {
   try {
     const { title, page = 1, type, year } = req.query;
-    
+    if (!title) {
+      return res.status(400).json({
+        success: false,
+        error: "A 'title' query parameter is required to search.",
+        timestamp: new Date().toISOString(),
+      });
+    }
     Logger.info(`🔍 Searching movies: "${title}"`, {
       page,
       type,

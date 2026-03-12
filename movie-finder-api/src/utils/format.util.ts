@@ -28,10 +28,10 @@ export const formatMovieDetails = (movie: OMDbMovieDetails): FormattedMovieDetai
   country: movie.Country !== 'N/A' ? movie.Country.split(', ') : [],
   awards: movie.Awards !== 'N/A' ? movie.Awards : null,
   ratings: movie.Ratings || [],
-  metascore: movie.Metascore !== 'N/A' ? parseInt(movie.Metascore) : null,
-  imdbRating: movie.imdbRating !== 'N/A' ? parseFloat(movie.imdbRating) : null,
-  imdbVotes: movie.imdbVotes !== 'N/A' ? movie.imdbVotes.replace(/,/g, '') : null,
-  boxOffice: movie.BoxOffice !== 'N/A' ? movie.BoxOffice : null,
-  production: movie.Production !== 'N/A' ? movie.Production : null,
-  website: movie.Website !== 'N/A' ? movie.Website : null,
+metascore: movie.Metascore && movie.Metascore !== 'N/A' ? parseInt(movie.Metascore) : null,
+    imdbRating: movie.imdbRating && movie.imdbRating !== 'N/A' ? parseFloat(movie.imdbRating) : null,
+    imdbVotes: movie.imdbVotes && movie.imdbVotes !== 'N/A' ? movie.imdbVotes.replace(/,/g, '') : null,
+    boxOffice: movie.BoxOffice && movie.BoxOffice !== 'N/A' ? movie.BoxOffice : null,
+    production: movie.Production && movie.Production !== 'N/A' ? movie.Production : null,
+    website: movie.Website && movie.Website !== 'N/A' ? movie.Website : null
 });

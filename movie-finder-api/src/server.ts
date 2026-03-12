@@ -9,15 +9,15 @@ import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-import { config } from './config/env.ts';
-import Logger from './config/logger.ts';
-import { corsMiddleware } from './middleware/cors.ts';
-import { apiLimiter } from './middleware/rateLimiter.ts';
-import { requestLogger } from './middleware/logging.ts';
-import { errorHandler } from './middleware/errorHandler.ts';
-import { addRequestId } from './middleware/requestId.ts';
-import { cacheService } from './config/cache.ts';
-import movieRoutes from './routes/movie.routes.ts';
+import { config } from './config/env.js';
+import Logger from './config/logger.js';
+import { corsMiddleware } from './middleware/cors.js';
+import { apiLimiter } from './middleware/rateLimiter.js';
+import { requestLogger } from './middleware/logging.js';
+import { errorHandler } from './middleware/errorHandler.js';
+import { addRequestId } from './middleware/requestId.js';
+import { cacheService } from './config/cache.js';
+import movieRoutes from './routes/movie.routes.js';
 
 const app = express();
 const PORT = config.server.port;
@@ -100,7 +100,7 @@ app.use((req, res) => {
     error: 'Route not found',
     message: `Cannot ${req.method} ${req.originalUrl}`,
     timestamp: new Date().toISOString(),
-    requestId: req.id,
+    requestId: req.params.id,
   });
 });
 

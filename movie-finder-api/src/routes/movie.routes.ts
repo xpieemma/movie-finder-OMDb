@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { searchMovies, getMovieDetails, getStats } from '../controllers/movie.controller.ts';
-import { validateSearch, validateMovieId } from '../middleware/validation.ts';
-import { searchLimiter } from '../middleware/rateLimiter.ts';
+import { searchMovies, getMovieDetails, getStats } from '../controllers/movie.controller.js';
+import { validateSearch, validateMovieId } from '../middleware/validation.js';
+import { searchLimiter } from '../middleware/rateLimiter.js';
 
 const router = Router();
 

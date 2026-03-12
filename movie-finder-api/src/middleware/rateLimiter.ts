@@ -1,7 +1,7 @@
 import rateLimit from 'express-rate-limit';
-import { config } from '../config/env.ts';
+import { config } from '../config/env.js';
 import { RATE_LIMIT, HTTP_STATUS, ERROR_MESSAGES } from '../config/constants.js';
-import Logger from '../config/logger.ts';
+import Logger from '../config/logger.js';
 
 /**
  * Rate limiting configuration for Koyeb deployment

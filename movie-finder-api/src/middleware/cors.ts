@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { config } from '../config/env.ts';
-import Logger from '../config/logger.ts';
+import { config } from '../config/env.js';
+import Logger from '../config/logger.js';
 
 /**
  * CORS configuration for multiple origins
