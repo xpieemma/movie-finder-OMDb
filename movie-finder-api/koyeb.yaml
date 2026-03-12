@@ -31,6 +31,6 @@ services:
       - key: OMDB_API_KEY
         secret: OMDB_API_KEY
       - key: ALLOWED_ORIGINS
-        value: "https://movie-finder.vercel.app,https://your-custom-domain.com"
+        value: "https://movie-finder-frontend-five.vercel.app,http://localhost:5173,https://movie-finder.vercel.app"
       - key: LOG_LEVEL
         value: info
