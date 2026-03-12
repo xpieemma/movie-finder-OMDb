@@ -10,6 +10,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://northern-christiane-997education-aa9be067.koyeb.app/api/:path*"
+    },
+    {
+      "source": "/ping",
+      "destination": "https://northern-christiane-997education-aa9be067.koyeb.app/ping"
     }
   ],
   "env": {

@@ -13,10 +13,18 @@ class MovieApi {
   private requestCount: number = 0;
 
   constructor() {
+    // this.api = axios.create({
+    //   baseURL: env.apiUrl,
+    //   timeout: 15000,
+    // });
     this.api = axios.create({
-      baseURL: env.apiUrl,
-      timeout: 15000,
-    });
+  // This must result in a relative path like "/api" 
+  // so the browser stays on the Vercel domain
+  baseURL: process.env.VITE_API_URL || '', 
+  timeout: 15000,
+});
+
+
 
     this.setupInterceptors();
     this.setupKeepAlive();
