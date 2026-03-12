@@ -1,4 +1,4 @@
-# 🎬 Movie Finder
+# 🎬 [Movie Finder](https://movie-finder-frontend-five.vercel.app/)
 
 A full-stack movie discovery application that provides detailed information about movies using the OMDb API.
 
@@ -82,6 +82,10 @@ movie-finder/
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+- **Student**
+- GitHub - [xpieemma](https://github.com/xpieemma)
+- LinkedIn - [E. Pierre](https://www.linkedin.com/in/epierr14)
 
 ## 📄 License
 
