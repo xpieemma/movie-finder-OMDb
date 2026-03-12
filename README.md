@@ -2,7 +2,7 @@
 
 A full-stack movie discovery application that provides detailed information about movies using the OMDb API.
 
-![logo](./public/movie-finder-logo.svg)
+![logo](./movie-finder-frontend/public/movie-finder-logo.svg)
 
 ## ✨ Features
 
