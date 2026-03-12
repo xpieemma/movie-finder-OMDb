@@ -1,0 +1,77 @@
+# Dependencies
+**/node_modules/
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
+
+# Production Builds
+**/dist/
+**/build/
+**/out/
+
+# Environment Variables
+**/.env
+**/.env.*
+!.env.example          # Keep example env files
+!.env.development      # Keep if you want to share dev defaults
+
+# Logs
+**/logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS Junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Testing
+**/coverage/
+**/.nyc_output/
+**/test-results/
+**/junit.xml
+
+# Cache files
+**/.cache/
+**/.temp/
+**/.turbo/
+**/.eslintcache
+**/.stylelintcache
+
+# TypeScript
+**/*.tsbuildinfo
+
+# Docker
+**/docker-compose.override.yml
+**/Dockerfile.dev
+
+# Vercel specific
+**.vercel
+**.vercel/output
+
+# Koyeb specific
+**.koyeb.yaml
+!.koyeb.yaml          # Keep the config file
+
+# Backend specific
+**/uploads/
+**/temp/
+**/data/
+
+# Frontend specific
+**/storybook-static/
+**/public/sw.js
+**/public/sw.js.map

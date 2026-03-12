@@ -1,0 +1,343 @@
+openapi: 3.0.0
+info:
+  title: Movie Finder API
+  description: RESTful API for searching movies and getting detailed information
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@moviefinder.com
+
+servers:
+  - url: http://localhost:3001/api
+    description: Development server
+  - url: https://movie-finder-api.koyeb.app/api
+    description: Production server
+
+tags:
+  - name: Movies
+    description: Movie search and details endpoints
+  - name: System
+    description: System health and monitoring endpoints
+
+paths:
+  /search:
+    get:
+      tags:
+        - Movies
+      summary: Search for movies
+      description: Search for movies by title with optional filters
+      parameters:
+        - name: title
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Movie title to search for
+          example: batman
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 1
+          description: Page number for pagination
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [movie, series, episode]
+          description: Filter by type
+        - name: year
+          in: query
+          schema:
+            type: string
+            pattern: '^\d{4}$'
+          description: Filter by year
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  totalResults:
+                    type: integer
+                    example: 156
+                  page:
+                    type: integer
+                    example: 1
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Movie'
+                  query:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      type:
+                        type: string
+                      year:
+                        type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+                  requestId:
+                    type: string
+        '400':
+          description: Bad request
+        '404':
+          description: No movies found
+        '429':
+          description: Rate limit exceeded
+        '500':
+          description: Server error
+
+  /movies/{id}:
+    get:
+      tags:
+        - Movies
+      summary: Get movie details
+      description: Get detailed information about a specific movie by IMDb ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '^tt\d{1,8}$'
+          description: IMDb ID of the movie
+          example: tt0372784
+        - name: plot
+          in: query
+          schema:
+            type: string
+            enum: [short, full]
+            default: full
+          description: Plot length
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  movie:
+                    $ref: '#/components/schemas/MovieDetails'
+                  timestamp:
+                    type: string
+                    format: date-time
+                  requestId:
+                    type: string
+        '404':
+          description: Movie not found
+        '500':
+          description: Server error
+
+  /stats:
+    get:
+      tags:
+        - System
+      summary: Get API statistics
+      description: Get usage statistics and cache information
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  stats:
+                    type: object
+                    properties:
+                      requestCount:
+                        type: integer
+                      remaining:
+                        type: integer
+                      resetTime:
+                        type: string
+                        format: date-time
+                      cache:
+                        type: object
+                        properties:
+                          hits:
+                            type: integer
+                          misses:
+                            type: integer
+                          keys:
+                            type: integer
+                          hitRate:
+                            type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+                  requestId:
+                    type: string
+
+  /health:
+    get:
+      tags:
+        - System
+      summary: Health check
+      description: Check if the API is healthy
+      responses:
+        '200':
+          description: API is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+                  timestamp:
+                    type: string
+                    format: date-time
+                  environment:
+                    type: string
+                  uptime:
+                    type: number
+                  cache:
+                    type: object
+
+  /ping:
+    get:
+      tags:
+        - System
+      summary: Ping
+      description: Lightweight health check for monitoring
+      responses:
+        '200':
+          description: pong
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: pong
+
+components:
+  schemas:
+    Movie:
+      type: object
+      properties:
+        id:
+          type: string
+          example: tt0372784
+        title:
+          type: string
+          example: Batman Begins
+        year:
+          type: string
+          example: 2005
+        type:
+          type: string
+          example: movie
+        poster:
+          type: string
+          nullable: true
+          example: https://m.media-amazon.com/images/M/MV5BZmUwNGU2ZmItMmRiNC00MjhlLTg5YWUtODMyNzkxODYzMmZlXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg
+        imdbUrl:
+          type: string
+          example: https://www.imdb.com/title/tt0372784
+
+    MovieDetails:
+      allOf:
+        - $ref: '#/components/schemas/Movie'
+        - type: object
+          properties:
+            rated:
+              type: string
+              nullable: true
+              example: PG-13
+            released:
+              type: string
+              nullable: true
+              example: 15 Jun 2005
+            runtime:
+              type: string
+              nullable: true
+              example: 140 min
+            genres:
+              type: array
+              items:
+                type: string
+              example: ["Action", "Crime", "Drama"]
+            director:
+              type: string
+              nullable: true
+              example: Christopher Nolan
+            writers:
+              type: array
+              items:
+                type: string
+              example: ["Christopher Nolan", "David S. Goyer"]
+            actors:
+              type: array
+              items:
+                type: string
+              example: ["Christian Bale", "Michael Caine", "Liam Neeson"]
+            plot:
+              type: string
+              nullable: true
+              example: After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from corruption.
+            language:
+              type: array
+              items:
+                type: string
+              example: ["English", "Mandarin"]
+            country:
+              type: array
+              items:
+                type: string
+              example: ["USA", "UK"]
+            awards:
+              type: string
+              nullable: true
+              example: Nominated for 1 Oscar. 14 wins & 73 nominations total
+            ratings:
+              type: array
+              items:
+                type: object
+                properties:
+                  Source:
+                    type: string
+                  Value:
+                    type: string
+            metascore:
+              type: number
+              nullable: true
+              example: 70
+            imdbRating:
+              type: number
+              nullable: true
+              example: 8.2
+            imdbVotes:
+              type: string
+              nullable: true
+              example: 1453271
+            boxOffice:
+              type: string
+              nullable: true
+              example: $206,852,432
+            production:
+              type: string
+              nullable: true
+              example: Warner Bros.
+            website:
+              type: string
+              nullable: true
+              example: https://www.warnerbros.com/batman-begins
