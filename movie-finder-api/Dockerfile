@@ -2,27 +2,27 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-COPY tsconfig.json ./
+# 1. Copy package files from the subfolder
+COPY movie-finder-api/package*.json ./
+COPY movie-finder-api/tsconfig.json ./
 
-# Install dependencies
+# 2. Install dependencies
 RUN npm ci
 
-# Copy source code
-COPY src/ ./src/
-COPY swagger/ ./swagger/
+# 3. Copy source code from the subfolder
+COPY movie-finder-api/src/ ./src/
+COPY movie-finder-api/swagger/ ./swagger/
 
-# Build TypeScript
+# 4. Build TypeScript
 RUN npm run build
 
-# Remove dev dependencies
+# 5. Remove dev dependencies
 RUN npm prune --production
 
 # Expose port
 EXPOSE 3001
 
-# Health check
+# Health check (matches your internal port)
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   CMD node -e "require('http').get('http://localhost:3001/health', (r) => {r.statusCode === 200 ? process.exit(0) : process.exit(1)})"
 
