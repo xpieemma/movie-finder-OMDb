@@ -99,7 +99,7 @@ class MovieApi {
 
   async searchMovies(params: SearchParams, retryCount = 2): Promise<SearchResponse> {
     try {
-      return await this.api.get('/search', { params });
+      return await this.api.get('/api/search', { params });
     } catch (error: any) {
       if (retryCount > 0 && error.response?.status >= 500) {
         console.log(`Retrying search, ${retryCount} attempts left`);
