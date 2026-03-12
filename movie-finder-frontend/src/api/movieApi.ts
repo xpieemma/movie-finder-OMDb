@@ -89,13 +89,13 @@ class MovieApi {
     // Disabled - useKeepAlive hook handles this
   }
 
-async searchMovie(params: SearchParams): Promise<SearchResponse> {
-return await this.api.get('/api/search', { params });
-}
+// async searchMovie(params: SearchParams): Promise<SearchResponse> {
+// return await this.api.get('/api/search', { params });
+// }
 
-  async ping(): Promise<any> {
-    return this.api.get('/ping');
-  }
+//   async ping(): Promise<any> {
+//     return this.api.get('/ping');
+//   }
 
   async searchMovies(params: SearchParams, retryCount = 2): Promise<SearchResponse> {
     try {
