@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
-import Logger from '../config/logger.ts';
-import { config } from '../config/env.ts';
-import { cacheService } from '../config/cache.ts';
-import { OMDB, ERROR_MESSAGES } from '../config/constants.ts';
+import Logger from '../config/logger.js';
+import { config } from '../config/env.js';
+import { cacheService } from '../config/cache.js';
+import { OMDB, ERROR_MESSAGES } from '../config/constants.js';
 import { 
   OMDbSearchResponse, 
   OMDbMovieDetails,

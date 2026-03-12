@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import Logger from '../config/logger.ts';
+import Logger from '../config/logger.js';
 import { omdbService } from '../services/omdb.service.js';
-import { HTTP_STATUS, ERROR_MESSAGES } from '../config/constants.ts';
-import { SearchParams } from '../types/movie.types.ts';
+import { HTTP_STATUS, ERROR_MESSAGES } from '../config/constants.js';
+import { SearchParams } from '../types/movie.types.js';
 
 /**
  * Search movies controller
@@ -16,7 +16,6 @@ export const searchMovies = async (
     const { title, page = 1, type, year } = req.query;
     
     Logger.info(`🔍 Searching movies: "${title}"`, {
-      requestId: req.id,
       page,
       type,
       year,
@@ -29,14 +28,12 @@ export const searchMovies = async (
         success: false,
         error: result.error,
         timestamp: new Date().toISOString(),
-        requestId: req.id,
       });
     }
 
     res.json({
       ...result,
       timestamp: new Date().toISOString(),
-      requestId: req.id,
     });
   } catch (error) {
     next(error);
@@ -56,7 +53,7 @@ export const getMovieDetails = async (
     const { plot = 'full' } = req.query;
     
     Logger.info(`🎬 Fetching movie details: ${id}`, {
-      requestId: req.id,
+      movieId: id,
       plot,
     });
 
@@ -67,14 +64,14 @@ export const getMovieDetails = async (
         success: false,
         error: result.error,
         timestamp: new Date().toISOString(),
-        requestId: req.id,
+        movieId: id,
       });
     }
 
     res.json({
       ...result,
       timestamp: new Date().toISOString(),
-      requestId: req.id,
+      movieId: id,
     });
   } catch (error) {
     next(error);
@@ -96,7 +93,6 @@ export const getStats = async (
       success: true,
       stats,
       timestamp: new Date().toISOString(),
-      requestId: req.id,
     });
   } catch (error) {
     next(error);

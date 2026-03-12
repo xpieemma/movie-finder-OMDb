@@ -1,4 +1,4 @@
-import { OMDbMovie, OMDbMovieDetails, FormattedMovie, FormattedMovieDetails } from '../types/movie.types';
+import { OMDbMovie, OMDbMovieDetails, FormattedMovie, FormattedMovieDetails } from '../types/movie.types.js';
 
 export const formatMovieSearchResult = (movie: OMDbMovie): FormattedMovie => ({
   id: movie.imdbID,

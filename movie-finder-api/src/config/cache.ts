@@ -1,7 +1,7 @@
 import NodeCache from 'node-cache';
-import Logger from './logger.ts';
-import { config } from './env.ts';
-import { CACHE } from './constants.ts';
+import Logger from './logger.js';
+import { config } from './env.js';
+import { CACHE } from './constants.js';
 
 /**
  * Environment-aware caching strategy
