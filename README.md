@@ -85,6 +85,10 @@ movie-finder/
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+- **Student**
+- GitHub - [xpieemma](https://github.com/xpieemma)
+- LinkedIn - [E. Pierre](https://www.linkedin.com/in/epierr14)
+
 ## 📄 License
 
 This project is licensed under the ISC License.
