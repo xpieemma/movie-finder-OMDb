@@ -10,7 +10,7 @@ const requiredEnvVars = ['OMDB_API_KEY'];
 const optionalEnvVars = {
   PORT: '3001',
   NODE_ENV: ENVIRONMENTS.DEVELOPMENT,
-  ALLOWED_ORIGINS: 'http://localhost:3000',
+  ALLOWED_ORIGINS: 'http://localhost:3000,http://localhost:5173',
   RATE_LIMIT_WINDOW: '15',
   RATE_LIMIT_MAX_REQUESTS: '100',
   LOG_LEVEL: 'debug',

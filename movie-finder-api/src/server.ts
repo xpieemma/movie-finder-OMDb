@@ -24,7 +24,8 @@ const PORT = config.server.port;
 
 // Load Swagger
 const swaggerDocument = YAML.load(path.join(__dirname, '../swagger/swagger.yaml'));
-
+// CORS
+app.use(corsMiddleware);
 // Security middleware
 app.use(helmet({
   contentSecurityPolicy: config.server.isProduction ? undefined : false,
@@ -35,9 +36,6 @@ app.use(compression({
   level: 6,
   threshold: 1024,
 }));
-
-// CORS
-app.use(corsMiddleware);
 
 // Request parsing
 app.use(express.json({ limit: '10mb' }));

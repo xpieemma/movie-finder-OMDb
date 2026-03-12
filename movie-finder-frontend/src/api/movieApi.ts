@@ -16,9 +16,6 @@ class MovieApi {
     this.api = axios.create({
       baseURL: env.apiUrl,
       timeout: 15000,
-      headers: {
-        'Content-Type': 'application/json',
-      },
     });
 
     this.setupInterceptors();
@@ -34,11 +31,9 @@ class MovieApi {
           ...config.params,
           _t: Date.now(),
         };
-
-        config.headers['X-Retry-Count'] = '0';
         
         if (env.isDevelopment) {
-          console.log(`í³¡ API Request #${this.requestCount}:`, {
+          console.log(`ðŸŽ¬ API Request #${this.requestCount}:`, {
             method: config.method,
             url: config.url,
             params: config.params,
@@ -83,16 +78,7 @@ class MovieApi {
   }
 
   private setupKeepAlive(): void {
-    if (env.isProduction) {
-      setInterval(async () => {
-        try {
-          await this.ping();
-          console.log('í²“ Keep-alive ping sent');
-        } catch (error) {
-          console.error('Keep-alive failed:', error);
-        }
-      }, 10 * 60 * 1000);
-    }
+    // Disabled - useKeepAlive hook handles this
   }
 
   async ping(): Promise<any> {
