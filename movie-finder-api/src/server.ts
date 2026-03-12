@@ -18,6 +18,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 import { addRequestId } from './middleware/requestId.js';
 import { cacheService } from './config/cache.js';
 import movieRoutes from './routes/movie.routes.js';
+import cors from 'cors';
 
 const app = express();
 const PORT = config.server.port;
@@ -25,7 +26,23 @@ const PORT = config.server.port;
 // Load Swagger
 const swaggerDocument = YAML.load(path.join(__dirname, '../swagger/swagger.yaml'));
 // CORS
-app.use(corsMiddleware);
+// app.use(corsMiddleware);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || origin.endsWith('.vercel.app') || 
+        config.cors.allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-ID'],
+}));
+
+
 // Security middleware
 app.use(helmet({
   contentSecurityPolicy: config.server.isProduction ? undefined : false,
