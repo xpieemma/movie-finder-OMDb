@@ -2,6 +2,8 @@
 
 A full-stack movie discovery application that provides detailed information about movies using the OMDb API.
 
+![logo](./public/movie-finder-logo.svg)
+
 ## ✨ Features
 
 - **Search Movies** - Find any movie by title with pagination support
