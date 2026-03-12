@@ -1,6 +1,6 @@
 # Dependencies
 **/node_modules/
-**/package-lock.json
+#**/package-lock.json
 **/yarn.lock
 **/pnpm-lock.yaml
 
@@ -75,3 +75,4 @@ desktop.ini
 **/storybook-static/
 **/public/sw.js
 **/public/sw.js.map
+.vercel
