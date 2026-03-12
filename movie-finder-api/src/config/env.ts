@@ -4,7 +4,15 @@ import { ENVIRONMENTS } from './constants.js';
 
 /**
  * Environment validation and configuration
+ * 
+ * 
+ * 
  */
+
+export const env = {
+  apiUrl: process.env.VITE_API_URL || '', // Should default to empty string for relative paths
+  isDevelopment: process.env.MODE === 'development',
+};
 const requiredEnvVars = ['OMDB_API_KEY'];
 
 const optionalEnvVars = {
