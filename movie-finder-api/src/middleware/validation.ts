@@ -34,7 +34,7 @@ export const validateMovieId = (req: Request, res: Response, next: NextFunction)
     });
   }
   
-  const imdbIdRegex = /^tt\d{1,8}$/;
+  const imdbIdRegex = /^tt\d+$/;
   if (!imdbIdRegex.test(id)) {
     return res.status(HTTP_STATUS.BAD_REQUEST).json({
       success: false,
