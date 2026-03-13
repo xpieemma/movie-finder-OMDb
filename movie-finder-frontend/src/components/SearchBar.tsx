@@ -1,5 +1,6 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { toast } from 'react-hot-toast';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -16,10 +17,20 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialValue = '', isLo
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (query.trim() && !isLoading) {
-      onSearch(query.trim());
+    const trimmed = query.trim();
+
+    if (!trimmed) return; // ignore empty searches
+
+    if (trimmed.length < 3) {
+      toast.error('Please enter at least 3 characters');
+      return;
+    }
+
+    if (!isLoading) {
+      onSearch(trimmed);
     }
   };
+  
 
   return (
     <motion.form

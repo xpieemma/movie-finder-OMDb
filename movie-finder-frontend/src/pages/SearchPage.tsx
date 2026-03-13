@@ -150,7 +150,7 @@ const SearchPage: React.FC = () => {
         movies={movies} 
         isLoading={isLoading} 
         error={error}
-        emptyMessage={query ? `No movies found for "${query}"` : 'Enter a search term to find movies'}
+        emptyMessage={query.length < 3 ? 'Enter at least 3 characters to search' : query ?`No movies found for "${query}"` : 'Enter a search term to find movies'}
       />
 
       {pagination.totalPages > 1 && !isRateLimited && (
