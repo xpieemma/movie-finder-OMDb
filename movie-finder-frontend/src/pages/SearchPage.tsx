@@ -55,12 +55,21 @@ const SearchPage: React.FC = () => {
       }, { replace: true });
       
     } catch (err: any) {
+      let errorMessage = 'Failed to search movies'
       if (err.response?.status === 429) {
         setIsRateLimited(true);
-        setError('Rate limit exceeded. Please wait a moment before searching again.');
-      } else {
-        setError(err.message || 'Failed to search movies');
+        errorMessage = 'Rate limit exceeded. Please wait a moment before searching again.';
+      } else if (err.response?.data?.error) {
+        errorMessage = err.response.data.error;
+      } else if (err.response?.data?.message) { 
+        errorMessage = err.response.data.message;
+      } else if (err.message) {
+        errorMessage = err.message;
       }
+      setError(errorMessage);
+      //   {
+      //   setError(err.message || 'Failed to search movies');
+      // }
       setMovies([]);
     } finally {
       setIsLoading(false);

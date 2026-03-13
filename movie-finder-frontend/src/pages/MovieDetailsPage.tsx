@@ -27,7 +27,15 @@ const MovieDetailsPage: React.FC = () => {
     setError(response.error || 'Movie not found');
   }
       } catch (err: any) {
-        setError(err.message || 'Failed to fetch movie details');
+        let errorMessage = 'Failed to fetch movie details';
+        if (err.response?.data?.error) {
+       errorMessage = err.response.data.error;
+      } else if (err.response?.data?.message) {
+        errorMessage = err.response.data.message;
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      setError(errorMessage);
       } finally {
         setIsLoading(false);
       }
