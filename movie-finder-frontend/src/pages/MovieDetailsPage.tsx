@@ -18,7 +18,14 @@ const MovieDetailsPage: React.FC = () => {
         setIsLoading(true);
         setError(null);
         const response = await movieApi.getMovieDetails(id);
-        setMovie(response.movie);
+
+       // Check if the response indicates success and contains a movie
+  if (response.success && response.movie) {
+    setMovie(response.movie);
+  } else {
+  
+    setError(response.error || 'Movie not found');
+  }
       } catch (err: any) {
         setError(err.message || 'Failed to fetch movie details');
       } finally {

@@ -45,12 +45,14 @@ export interface SearchResponse {
     type?: string;
     year?: string;
   };
+  error?: string;
   timestamp?: string;
   requestId?: string;
 }
 
 export interface MovieDetailsResponse {
   success: boolean;
+  error?: string;
   movie: MovieDetails;
   timestamp?: string;
   requestId?: string;
