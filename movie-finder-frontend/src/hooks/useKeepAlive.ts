@@ -3,17 +3,23 @@ import { movieApi } from '../api/movieApi';
 
 export const useKeepAlive = () => {
   useEffect(() => {
-    if (import.meta.env.PROD) {
+    // Use import.meta.env for Vite projects
+    if (process.env.PROD) {
       const keepAlive = async () => {
         try {
-          await movieApi.ping();
-          console.log('í²“ Keep-alive ping sent');
+          // Check if ping exists before calling to avoid runtime crashes
+          if (typeof movieApi.ping === 'function') {
+            await movieApi.ping();
+            console.log('ðŸ“¡ Keep-alive ping sent');
+          }
         } catch (error) {
-          console.error('Keep-alive failed:', error);
+          // We don't usually want to show a toast for a background ping failure
+          console.warn('Keep-alive silent failure:', error);
         }
       };
 
       keepAlive();
+      // Ping every 10 minutes to keep Koyeb awake
       const interval = setInterval(keepAlive, 10 * 60 * 1000);
       return () => clearInterval(interval);
     }

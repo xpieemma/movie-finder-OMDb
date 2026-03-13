@@ -1,7 +1,11 @@
 {
   "name": "movie-finder-frontend",
   "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "main": "postcss.config.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

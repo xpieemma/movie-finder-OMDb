@@ -93,9 +93,9 @@ class MovieApi {
 // return await this.api.get('/api/search', { params });
 // }
 
-//   async ping(): Promise<any> {
-//     return this.api.get('/ping');
-//   }
+  async ping(): Promise<any> {
+    return this.api.get('/api/ping');
+  }
 
   async searchMovies(params: SearchParams, retryCount = 2): Promise<SearchResponse> {
     try {
@@ -111,7 +111,7 @@ class MovieApi {
   }
 
   async getMovieDetails(id: string, plot: 'short' | 'full' = 'full'): Promise<MovieDetailsResponse> {
-    return this.api.get(`/movies/${id}`, { params: { plot } });
+    return this.api.get(`/api/movies/${id}`, { params: { plot } });
   }
 
   async getHealth(): Promise<ApiResponse<{ status: string }>> {
